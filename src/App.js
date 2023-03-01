@@ -48,8 +48,8 @@ function App() {
         <ul>
         {data.status !== false ? (
         <ul>
-          {data.map((item) => {
-            return <li key={item.id}>{item.title}</li>;
+          {data.map((item, itemIndex) => {
+            return <li key={itemIndex}>{item.title}</li>;
           })}
         </ul>
       ) : (
