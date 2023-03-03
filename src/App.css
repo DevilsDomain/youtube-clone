@@ -1,5 +1,14 @@
 .App {
   text-align: center;
 }
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  width: 500px;
+  height: 300px;
+  margin: auto;
+}
 
 

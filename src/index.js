@@ -14,7 +14,7 @@ root.render(
 
         <Routes>
           <Route index path='/' element={<App/>}/>
-          <Route path='/video' element={<VideoPage/>} />
+          <Route path='/video/:videoId' element={<VideoPage/>} />
         </Routes>
 
     </BrowserRouter>
