@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import Video from './components/Video';
 import SearchBar from './SearchBar';
 
+
 const fetcher = url => axios.get(url).then(res => res.data)
 function App() {
   const [searchText, setSearchText] = useState('cat')
@@ -13,7 +14,7 @@ function App() {
 
   // search bar component
   
-  console.log(data)
+
   if (!data) {
     return "Loading...";
   }

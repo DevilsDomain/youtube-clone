@@ -1,7 +1,4 @@
-import React from 'react'
 import {Link} from "react-router-dom";
-import VideoPage from './VideoPage';
-
 
 function Video({data}) {
 
@@ -10,11 +7,10 @@ function Video({data}) {
   return (
     <div className='container'>
         {data.map((item, itemIndex) => {
+            console.log(item.id.videoId);
             return (
             <div key={itemIndex} className="stack">
-                <Link to={`/video/${item.id.videoId}/${data}`}>{item.title}</Link>
-                {/* <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title={item.title}
-                 width="560" height="315" frameborder="0" allowfullscreen></iframe> */}
+                <Link to={`/video/${item.id.videoId}`}>{item.title}</Link>
                  <img src={item.snippet.thumbnails.url} alt=''></img>
             </div>
             );
