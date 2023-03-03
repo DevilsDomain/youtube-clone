@@ -12,7 +12,7 @@ function Video({data}) {
         {data.map((item, itemIndex) => {
             return (
             <div key={itemIndex} className="stack">
-                <Link to={`/video/${item.id.videoId}`}>{item.title}</Link>
+                <Link to={`/video/${item.id.videoId}/${data}`}>{item.title}</Link>
                 {/* <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title={item.title}
                  width="560" height="315" frameborder="0" allowfullscreen></iframe> */}
                  <img src={item.snippet.thumbnails.url} alt=''></img>

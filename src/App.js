@@ -3,6 +3,7 @@ import axios from 'axios'
 import useSWR from 'swr'
 import { useState, useRef } from 'react';
 import Video from './components/Video';
+import SearchBar from './SearchBar';
 
 const fetcher = url => axios.get(url).then(res => res.data)
 function App() {
@@ -11,25 +12,6 @@ function App() {
   const { data, error } = useSWR( `https://youtube.thorsteinsson.is/api/search?q=${searchText}`, fetcher)
 
   // search bar component
-  function SearchBar() {
-    // handle submit
-    const handleSubmit = () => {
-      let value = inputRef.current.value;
-      setSearchText(value);
-    }
-  
-    return (
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Search video..."
-          ref={inputRef}
-        />
-        <button type="button">
-          search
-        </button>
-      </form>
-    );
-  }
   
   console.log(data)
   if (!data) {
@@ -45,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <h1>YouTube?</h1>
-      <SearchBar />
+      <SearchBar inputRef={inputRef} searchText={searchText} setSearchText={setSearchText} />
       <Video data={data} />
     </div>
   );
