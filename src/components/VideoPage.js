@@ -6,6 +6,26 @@ import { useState, useRef } from 'react';
 import Video from './Video';
 import SearchBar from './SearchBar';
 import Logo from "./Logo";
+import styled from "styled-components";
+
+const Title = styled.h1`
+    color: #e5e5e5;
+`;
+
+const Description = styled.p`
+    color: #e5e5e5;
+    font-size: 20px;
+    width: 1400;
+
+`;
+
+const SearchTitle = styled.h1`
+    color: #e5e5e5;
+`;
+
+const Container = styled.div`
+    text-align: center;
+`;
 
 
 function VideoPage() {
@@ -35,22 +55,22 @@ function VideoPage() {
     console.log(rec)
     
     return (
-        <div>
+        <Container>
             <Logo />
             <div>
-                <h1>{data.title}</h1>
+                <Title>{data.title}</Title>
                 <iframe src={`https://www.youtube.com/embed/${videoId}`} title={data.title}
-                width="560" height="315" frameborder="0" allowfullscreen></iframe>
-                <p>{data.description}</p>
+                width="1400" height="700" frameborder="0" allowfullscreen></iframe>
+                <Description>{data.description}</Description>
             </div>
-            <h1>Search Videos</h1>
+            <SearchTitle>Search Videos</SearchTitle>
             <SearchBar inputRef={inputRef} handleSearch={handleSearch} />
             {rec  ? (
                 <Video data={rec}/>
             ) : (
                 <div>Loading recommendations...</div>
             )}
-        </div>
+        </Container>
     );
 }
 

@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React from 'react'
 import {Link} from "react-router-dom";
-import styled from "styled-components";
 
 
 const Title = styled(Link)`
@@ -8,13 +8,18 @@ const Title = styled(Link)`
   text-decoration: none;
   font-size: 50px;
   font-weight: 700;
-  margin-left: 570px;
   margin-top: 100px;
+`;
+
+const Container = styled.div`
+    text-align: center;
 `;
 
 function Logo() {
   return (
-     <Title to="/">YouTube?🤡</Title>
+    <Container>
+        <Title to="/">YouTube?🤡</Title>
+    </Container>
   )
 }
 
