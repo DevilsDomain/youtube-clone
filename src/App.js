@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import Video from './components/Video';
 import SearchBar from './components/SearchBar';
 import Logo from './components/Logo';
+import styled from "styled-components";
 
 
 const fetcher = url => axios.get(url).then(res => res.data)
@@ -29,9 +30,8 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       <Logo />
-      <h1>YouTube?</h1>
       <SearchBar inputRef={inputRef} setSearchText={setSearchText} handleSearch={handleSearch} />
       <Video data={data} />
     </div>

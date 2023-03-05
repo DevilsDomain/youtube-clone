@@ -37,7 +37,6 @@ function VideoPage() {
     return (
         <div>
             <Logo />
-            <SearchBar inputRef={inputRef} handleSearch={handleSearch} />
             <div>
                 <h1>{data.title}</h1>
                 <iframe src={`https://www.youtube.com/embed/${videoId}`} title={data.title}
@@ -45,7 +44,8 @@ function VideoPage() {
                 <p>{data.description}</p>
             </div>
             <h1>Search Videos</h1>
-            {rec ? (
+            <SearchBar inputRef={inputRef} handleSearch={handleSearch} />
+            {rec  ? (
                 <Video data={rec}/>
             ) : (
                 <div>Loading recommendations...</div>
