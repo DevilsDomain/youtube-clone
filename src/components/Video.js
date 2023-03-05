@@ -15,7 +15,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: auto;
+    margin-left: 43px;
 `;
 
 const Img = styled.img`

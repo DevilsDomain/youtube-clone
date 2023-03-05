@@ -28,6 +28,11 @@ const Button = styled.button`
   margin-left: 10px;
 `;
 
+const Form = styled.form`
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
 
 
 function SearchBar({inputRef, handleSearch}) {
@@ -39,7 +44,7 @@ function SearchBar({inputRef, handleSearch}) {
     }
   
     return (
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Search
           placeholder="Search video..."
           ref={inputRef}
@@ -47,7 +52,7 @@ function SearchBar({inputRef, handleSearch}) {
         <Button type="submit">
           search
         </Button>
-      </form>
+      </Form>
     );
 }
 
