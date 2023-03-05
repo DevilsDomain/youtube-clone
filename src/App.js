@@ -14,7 +14,9 @@ function App() {
   const { data, error } = useSWR( `https://youtube.thorsteinsson.is/api/search?q=${searchText}`, fetcher)
 
   // search bar component
-  
+  const handleSearch = (value) => {
+    setSearchText(value);
+  }
 
   if (!data) {
     return "Loading...";
@@ -30,7 +32,7 @@ function App() {
     <div className="App">
       <Logo />
       <h1>YouTube?</h1>
-      <SearchBar inputRef={inputRef} setSearchText={setSearchText} />
+      <SearchBar inputRef={inputRef} setSearchText={setSearchText} handleSearch={handleSearch} />
       <Video data={data} />
     </div>
   );
