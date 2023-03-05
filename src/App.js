@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <h1>YouTube?</h1>
-      <SearchBar inputRef={inputRef} searchText={searchText} setSearchText={setSearchText} />
+      <SearchBar inputRef={inputRef} setSearchText={setSearchText} />
       <Video data={data} />
     </div>
   );

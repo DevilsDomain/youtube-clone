@@ -7,7 +7,6 @@ function Video({data}) {
   return (
     <div className='container'>
         {data.map((item, itemIndex) => {
-            console.log(item.id.videoId);
             return (
             <div key={itemIndex} className="stack">
                 <Link to={`/video/${item.id.videoId}`}>{item.title}</Link>

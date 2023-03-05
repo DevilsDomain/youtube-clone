@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SearchBar({inputRef, searchText, setSearchText}) {
+function SearchBar({inputRef, setSearchText}) {
     // handle submit
     const handleSubmit = () => {
       let value = inputRef.current.value;
