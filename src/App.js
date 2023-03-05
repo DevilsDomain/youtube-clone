@@ -3,7 +3,8 @@ import axios from 'axios'
 import useSWR from 'swr'
 import { useState, useRef } from 'react';
 import Video from './components/Video';
-import SearchBar from './SearchBar';
+import SearchBar from './components/SearchBar';
+import Logo from './components/Logo';
 
 
 const fetcher = url => axios.get(url).then(res => res.data)
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <Logo />
       <h1>YouTube?</h1>
       <SearchBar inputRef={inputRef} setSearchText={setSearchText} />
       <Video data={data} />

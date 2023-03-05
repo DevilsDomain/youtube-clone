@@ -4,7 +4,9 @@ import axios from 'axios'
 import useSWR from 'swr'
 import { useState, useRef } from 'react';
 import Video from './Video';
-import SearchBar from '../SearchBar';
+import SearchBar from './SearchBar';
+import Logo from "./Logo";
+
 
 function VideoPage() {
     let {videoId} = useParams()
@@ -34,6 +36,7 @@ function VideoPage() {
     
     return (
         <div>
+            <Logo />
             <SearchBar inputRef={inputRef} handleSearch={handleSearch} />
             <div>
                 <h1>{data.title}</h1>

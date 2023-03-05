@@ -14,7 +14,7 @@ function SearchBar({inputRef, handleSearch}) {
           placeholder="Search video..."
           ref={inputRef}
         />
-        <button type="submit">
+        <button type="submit" onClick={handleSubmit}>
           search
         </button>
       </form>
