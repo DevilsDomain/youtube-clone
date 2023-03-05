@@ -1,10 +1,11 @@
 import React from 'react'
 
-function SearchBar({inputRef, setSearchText}) {
+function SearchBar({inputRef, handleSearch}) {
     // handle submit
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+      event.preventDefault();
       let value = inputRef.current.value;
-      setSearchText(value);
+      handleSearch(value);
     }
   
     return (
@@ -13,11 +14,11 @@ function SearchBar({inputRef, setSearchText}) {
           placeholder="Search video..."
           ref={inputRef}
         />
-        <button type="button">
+        <button type="submit">
           search
         </button>
       </form>
     );
-  }
+}
 
-export default SearchBar
+export default SearchBar;
