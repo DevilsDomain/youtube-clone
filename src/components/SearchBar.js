@@ -1,4 +1,34 @@
-import React from 'react'
+import React from 'react';
+import styled from "styled-components";
+
+const Search = styled.input`
+  width: 300px;
+  height: 40px;
+  border-radius: 15px;
+  outline: none;
+  border: 1px #a3a3a3 solid;
+  background: none;
+  color: white;
+  padding-left 20px;
+
+  ::placeholder {
+    color: #e5e5e5;
+  }
+
+`;
+
+const Button = styled.button`
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+  background: none;
+  border: none;
+  background-color: #ff0000;
+  color: #e5e5e5;
+  margin-left: 10px;
+`;
+
+
 
 function SearchBar({inputRef, handleSearch}) {
     // handle submit
@@ -10,13 +40,13 @@ function SearchBar({inputRef, handleSearch}) {
   
     return (
       <form onSubmit={handleSubmit}>
-        <input
+        <Search
           placeholder="Search video..."
           ref={inputRef}
         />
-        <button type="submit">
+        <Button type="submit">
           search
-        </button>
+        </Button>
       </form>
     );
 }
