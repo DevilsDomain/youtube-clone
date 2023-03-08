@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyledLink = styled(Link)`
   color: #e5e5e5;
@@ -30,9 +31,29 @@ const Stack = styled.div`
 
 `;
 
+const Playlist = styled.button`
+  margin-left: 20px;
+  padding: 5px;
+`;
+
+const PlaylistContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+
 
 
 function Video({data}) {
+  const [open, setOpen] = useState(false);
+  
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const playlists = ['name1', 'name2', 'name3']
+
+
   return (
     <Container>
         {data.map((item, itemIndex) => {
@@ -40,6 +61,17 @@ function Video({data}) {
             <Stack key={itemIndex}>
                  <Img src={item.snippet.thumbnails.url} alt='' />
                 <StyledLink to={`/video/${item.id.videoId}`}>{item.title}</StyledLink>
+                <PlaylistContainer>
+                  <Playlist onClick={handleOpen}>Add</Playlist>
+                  {console.log(open)}
+                  {open && (
+                  playlists.map((playlist, playlistIndex) => {
+                    return(
+                      <Playlist key={playlistIndex}>{playlist}</Playlist>
+                    );
+                    })
+                  )}
+                </PlaylistContainer>
             </Stack>
             );
         })}
