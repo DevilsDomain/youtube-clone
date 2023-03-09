@@ -2,7 +2,8 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
-import { playlistid } from '../store/playlistid';
+import { playlistNameGlobal } from '../store/playlistid';
+
 // css
 const Playlist = styled.button`
   margin-left: 20px;
@@ -23,6 +24,7 @@ const StyledLink = styled(Link)`
 
 function Playlists() {
     const [open, setOpen] = useState(false);
+    const [playlistName, setPlaylistName] = useState([]);
     const handleOpen = () => {
         setOpen(!open);
     };
@@ -34,7 +36,7 @@ function Playlists() {
             {open && (
             <>
             <StyledLink to="/create">Create</StyledLink>
-            {playlistid.map((playlist, playlistIndex) => {
+            {playlistNameGlobal.map((playlist, playlistIndex) => {
               return(
                 <Playlist key={playlistIndex}>{playlist}</Playlist>
 

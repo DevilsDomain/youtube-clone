@@ -7,7 +7,6 @@ import Video from './Video';
 import SearchBar from './SearchBar';
 import Logo from "./Logo";
 import styled from "styled-components";
-import { playlistid } from '../store/playlistid';
 
 
 const Title = styled.h1`

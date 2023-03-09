@@ -1,10 +1,6 @@
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
 import Playlists from "./Playlists";
-import { useContext } from 'react';
-import { AppContext } from '../App';
-
 
 const StyledLink = styled(Link)`
   color: #e5e5e5;

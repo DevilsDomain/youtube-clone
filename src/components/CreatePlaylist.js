@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { useState, useRef } from 'react';
 import axios from 'axios'
-import { playlistid } from '../store/playlistid';
+import { playlistid, playlistNameGlobal } from '../store/playlistid';
 import Logo from './Logo';
 
 
@@ -47,7 +47,20 @@ const Form = styled.form`
 
 function CreatePlaylist() {
   const inputRef = useRef('');
+  const [playlistName, setPlaylistName] = useState([]);
 
+  const handleCreatePlaylist = (playlistId) => {
+    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistId}`)
+      .then(function (response) {
+        console.log(response.data.name);
+        setPlaylistName(prevPlaylistName => [...prevPlaylistName, response.data.name]);
+        playlistNameGlobal.push(response.data.name)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setPlaylistName(prevPlaylistName => [...prevPlaylistName, error.data.name]);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,38 +72,31 @@ function CreatePlaylist() {
       console.log(response);
       playlistid.push(response.data.id);
       console.log(playlistid);
-
+      handleCreatePlaylist(response.data.id);
     })
     .catch(function (error) {
       console.log(error);
-      playlistid.push(error)
+      playlistid.push(error);
+      handleCreatePlaylist(error.data.id);
     });
   }
 
-
-
   return (
     <div>
-        <Logo />
-        <Title>Create Playlist</Title>
-        <Form onSubmit={handleSubmit}>
-        <Search
-          placeholder="Playlist name"
-          ref={inputRef}
-        />
-        <Button type="submit">
-          Create
-        </Button>
+      <Logo />
+      <Title>Create Playlist</Title>
+      <Form onSubmit={handleSubmit}>
+        <Search placeholder="Playlist name" ref={inputRef} />
+        <Button type="submit">Create</Button>
         <ul>
-        {playlistid.map((item, itemIndex) => {
-          return(
-            <li key={itemIndex}>{item}</li>
-          );
-        })}
+          {playlistNameGlobal.map((item, itemIndex) => {
+            return <li key={itemIndex}>{item}</li>;
+          })}
         </ul>
       </Form>
     </div>
-  )
+  );
 }
+
 
 export default CreatePlaylist
