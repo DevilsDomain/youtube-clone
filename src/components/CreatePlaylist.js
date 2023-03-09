@@ -4,8 +4,18 @@ import { useState, useRef } from 'react';
 import axios from 'axios'
 import { playlistid, playlistNameGlobal } from '../store/playlistid';
 import Logo from './Logo';
+import {Link} from "react-router-dom";
 
 
+
+
+const StyledLink = styled(Link)`
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 15px;
+  padding 0px 10px 10px 20px;
+  width: 300px;
+`;
 
 const Title = styled.h1`
     color: #e5e5e5;
@@ -48,9 +58,8 @@ const Form = styled.form`
 function CreatePlaylist() {
   const inputRef = useRef('');
   const [playlistName, setPlaylistName] = useState([]);
-
   const handleCreatePlaylist = (playlistId) => {
-    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistId}`)
+    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistid}`)
       .then(function (response) {
         console.log(response.data.name);
         setPlaylistName(prevPlaylistName => [...prevPlaylistName, response.data.name]);
@@ -90,7 +99,7 @@ function CreatePlaylist() {
         <Button type="submit">Create</Button>
         <ul>
           {playlistNameGlobal.map((item, itemIndex) => {
-            return <li key={itemIndex}>{item}</li>;
+            return <StyledLink key={itemIndex} to={`/playlist/${playlistid}`}>{item}</StyledLink>;
           })}
         </ul>
       </Form>
