@@ -75,7 +75,8 @@ function CreatePlaylist() {
     event.preventDefault();
     let value = inputRef.current.value;
     axios.post(' https://youtube.thorsteinsson.is/api/playlists', {
-      name : value
+      name : value,
+      videos : []
     })
     .then(function (response) {
       console.log(response);

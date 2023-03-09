@@ -31,7 +31,7 @@ function Video({item, itemIndex}) {
       <Stack key={itemIndex}>
         <Img src={item.snippet.thumbnails.url} alt='' />
         <StyledLink to={`/video/${item.id.videoId}`}>{item.snippet.title}</StyledLink>
-        <Playlists />
+        <Playlists videoId={item.id.videoId}/>
       </Stack>
     );
 }

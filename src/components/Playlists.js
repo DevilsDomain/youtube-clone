@@ -2,7 +2,9 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
-import { playlistNameGlobal } from '../store/playlistid';
+import { playlistNameGlobal, playlistid } from '../store/playlistid';
+import axios from 'axios'
+import useSWR from 'swr'
 
 // css
 const Playlist = styled.button`
@@ -22,12 +24,38 @@ const StyledLink = styled(Link)`
 `;
 
 
-function Playlists() {
+// const fetcher = url => axios.get(url).then(res => res.data)
+function Playlists({videoId}) {
+    // const { data, error } = useSWR( ` https://youtube.thorsteinsson.is/api/videos/${videoId}`, fetcher)
     const [open, setOpen] = useState(false);
-    const [playlistName, setPlaylistName] = useState([]);
+    const [video, setVideo] = useState([]);
     const handleOpen = () => {
         setOpen(!open);
     };
+
+    const handleClick = (playlistIndex, videoId, playlist) => {
+        axios.get(`https://youtube.thorsteinsson.is/api/videos/${videoId}`)
+          .then(function (response) {
+            console.log(response);
+            axios.post(`https://youtube.thorsteinsson.is/api/playlists/${playlistid[playlistIndex]}/videos`, response.data)
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+      
+      
+    
+      
+    
+      
+
 
   return (
     <PlaylistContainer>
@@ -38,8 +66,7 @@ function Playlists() {
             <StyledLink to="/create">Create</StyledLink>
             {playlistNameGlobal.map((playlist, playlistIndex) => {
               return(
-                <Playlist key={playlistIndex}>{playlist}</Playlist>
-
+                <Playlist key={playlistIndex} onClick={() => handleClick(playlistIndex, videoId, playlist)}>{playlist}</Playlist>
               );
             })}
           </>

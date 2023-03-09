@@ -28,6 +28,8 @@ function App() {
   const handleSearch = (value) => {
     setSearchText(value);
   }
+  
+
   if (!data) {
     return "Loading...";
   }
