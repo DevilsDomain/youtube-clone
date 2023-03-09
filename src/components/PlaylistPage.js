@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Logo from './Logo';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-import useSWR from 'swr'
-import Video from './Video';
+
 import Playlists from './Playlists';
 import {Link} from "react-router-dom";
+import { useState, useEffect, } from 'react';
+
 
 
 
@@ -56,46 +57,57 @@ const Container = styled.div`
 
 const fetcher = url => axios.get(url).then(res => res.data)
 function PlaylistPage() {
-  let {playlistId} = useParams()
-  const { data, error } = useSWR( `https://youtube.thorsteinsson.is/api/playlists/${playlistId}`, fetcher)
+  const [playlist, setPlaylist] = useState([]);
+  const { playlistId } = useParams();
 
-  if (!data) {
-    return "Loading...";
-  }
-  
-  if(error) {
-    return(
-      <p>Oops, looks like we are down!</p>
-      );
-    }
+  useEffect(() => {
+    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistId}`)
+      .then(res => {
+        setPlaylist(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
-    console.log(data)
+  const handleDelete = (videoId) => {
+    const updatedPlaylist = {
+      ...playlist,
+      videos: playlist.videos.filter(video => video.videoId !== videoId)
+    };
 
-    return (
-      <>
-        <Logo />
-        <Title>Playlist Page: {data.name}</Title>
-        <ul>
-          {data.videos ? (
-            data.videos.map((item, itemIndex) => {
-              return(
-                <Container>
-                <Stack key={itemIndex}>
-                  <Img src={item.thumbnailUrl} alt='' />
-                  <StyledLink to={`/video/${item.videoId}`}>{item.title}</StyledLink>
-                  <Playlists videoId={item.videoId}/>
-                </Stack>
-                <Delete>Delete</Delete>
-                </Container>
-              );
-            })
-          ) : (
-            <p>No videos in this playlist yet!</p>
-          )}
-        </ul>
-      </>
-    );
+    axios.put(`https://youtube.thorsteinsson.is/api/playlists/${playlistId}`, updatedPlaylist)
+      .then(res => {
+        setPlaylist(updatedPlaylist);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
+  console.log(playlist)
+
+  return (
+    <div>
+      <Logo></Logo>
+      <Title>{playlist.name}</Title>
+      <ul>
+        {playlist.videos && playlist.videos.map(video => (
+          <li key={video.videoId}>
+            <Container>
+              <Stack>
+                <Title>{video.title}</Title>
+                <Img src={video.thumbnailUrl} alt='' />
+                <StyledLink to={`/video/${video.videoId}`}>{video.title}</StyledLink>
+                <Playlists videoId={video.videoId}/>
+              </Stack>
+                <Delete onClick={() => handleDelete(video.videoId)}>Delete</Delete>
+            </Container>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default PlaylistPage
