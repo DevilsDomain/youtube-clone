@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { playlistNameGlobal, playlistid } from '../store/playlistid';
 import axios from 'axios'
-import useSWR from 'swr'
+
 
 // css
 const Playlist = styled.button`
@@ -28,12 +28,11 @@ const StyledLink = styled(Link)`
 function Playlists({videoId}) {
     // const { data, error } = useSWR( ` https://youtube.thorsteinsson.is/api/videos/${videoId}`, fetcher)
     const [open, setOpen] = useState(false);
-    const [video, setVideo] = useState([]);
     const handleOpen = () => {
         setOpen(!open);
     };
 
-    const handleClick = (playlistIndex, videoId, playlist) => {
+    const handleClick = (playlistIndex, videoId) => {
         axios.get(`https://youtube.thorsteinsson.is/api/videos/${videoId}`)
           .then(function (response) {
             console.log(response);
@@ -66,7 +65,7 @@ function Playlists({videoId}) {
             <StyledLink to="/create">Create</StyledLink>
             {playlistNameGlobal.map((playlist, playlistIndex) => {
               return(
-                <Playlist key={playlistIndex} onClick={() => handleClick(playlistIndex, videoId, playlist)}>{playlist}</Playlist>
+                <Playlist key={playlistIndex} onClick={() => handleClick(playlistIndex, videoId)}>{playlist}</Playlist>
               );
             })}
           </>

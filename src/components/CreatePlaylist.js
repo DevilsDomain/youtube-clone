@@ -59,7 +59,7 @@ function CreatePlaylist() {
   const inputRef = useRef('');
   const [playlistName, setPlaylistName] = useState([]);
   const handleCreatePlaylist = (playlistId) => {
-    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistid}`)
+    axios.get(`https://youtube.thorsteinsson.is/api/playlists/${playlistId}`)
       .then(function (response) {
         console.log(response.data.name);
         setPlaylistName(prevPlaylistName => [...prevPlaylistName, response.data.name]);
@@ -100,7 +100,7 @@ function CreatePlaylist() {
         <Button type="submit">Create</Button>
         <ul>
           {playlistNameGlobal.map((item, itemIndex) => {
-            return <StyledLink key={itemIndex} to={`/playlist/${playlistid}`}>{item}</StyledLink>;
+            return <StyledLink key={itemIndex} to={`/playlist/${playlistid[itemIndex]}`}>{item}</StyledLink>;
           })}
         </ul>
       </Form>
