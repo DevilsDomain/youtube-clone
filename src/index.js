@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes } from "react-router-dom";
 import VideoPage from './components/VideoPage';
+import CreatePlaylist from './components/CreatePlaylist';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +16,7 @@ root.render(
         <Routes>
           <Route index path='/' element={<App/>}/>
           <Route path='/video/:videoId' element={<VideoPage/>} />
+          <Route path='/create' element={<CreatePlaylist/>} />
         </Routes>
 
     </BrowserRouter>

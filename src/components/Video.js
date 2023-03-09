@@ -1,6 +1,10 @@
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
+import Playlists from "./Playlists";
+import { useContext } from 'react';
+import { AppContext } from '../App';
+
 
 const StyledLink = styled(Link)`
   color: #e5e5e5;
@@ -10,14 +14,6 @@ const StyledLink = styled(Link)`
   width: 300px;
 `;
 
-const Container = styled.div`
-    width: 1400px;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: 43px;
-`;
 
 const Img = styled.img`
     padding: 20px;
@@ -30,53 +26,18 @@ const Stack = styled.div`
     flex-direction: column;
 
 `;
-
-const Playlist = styled.button`
-  margin-left: 20px;
-  padding: 5px;
-`;
-
-const PlaylistContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-
-
-
-function Video({data}) {
-  const [open, setOpen] = useState(false);
+function Video({item, itemIndex}) {
+    if (!item || !item.snippet) {
+      return null;
+    }
   
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-
-  const playlists = ['name1', 'name2', 'name3']
-
-
-  return (
-    <Container>
-        {data.map((item, itemIndex) => {
-            return (
-            <Stack key={itemIndex}>
-                 <Img src={item.snippet.thumbnails.url} alt='' />
-                <StyledLink to={`/video/${item.id.videoId}`}>{item.title}</StyledLink>
-                <PlaylistContainer>
-                  <Playlist onClick={handleOpen}>Add</Playlist>
-                  {console.log(open)}
-                  {open && (
-                  playlists.map((playlist, playlistIndex) => {
-                    return(
-                      <Playlist key={playlistIndex}>{playlist}</Playlist>
-                    );
-                    })
-                  )}
-                </PlaylistContainer>
-            </Stack>
-            );
-        })}
-    </Container>
-  );
+    return (
+      <Stack key={itemIndex}>
+        <Img src={item.snippet.thumbnails.url} alt='' />
+        <StyledLink to={`/video/${item.id.videoId}`}>{item.snippet.title}</StyledLink>
+        <Playlists />
+      </Stack>
+    );
 }
 
 export default Video
